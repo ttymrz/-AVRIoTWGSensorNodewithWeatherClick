@@ -58,6 +58,7 @@ void sendToCloud(void)
 	int   rawTemperature = SENSORS_getTempValue();
 	int   light          = SENSORS_getLightValue();
 	float pressure = 0, humidity = 0;
+	float temprature = 0;
 
 	// Read the sensor data registers
 	Weather_readSensors();
@@ -65,17 +66,20 @@ void sendToCloud(void)
 	// Return the compensated measurement readings of each sensor
 	pressure = Weather_getPressureKPa();
 	humidity = Weather_getHumidityRH();
+	temprature = Weather_getTemperatureDegC();
 
 	int len = sprintf(
 	    json,
-	    "{\"Light\":%d,\"Temp\":\"%d.%02d\",\"Weather Click: Pressure\":%d.%02d, \"Weather Click: Humidity\":%d.%02d}",
+	    "{\"Light\":%d,\"Temp\":\"%d.%02d\",\"Weather Click: Pressure\":%d.%02d,\"Weather Click: Humidity\":%d.%02d,\"Weather Click: Temprature\":%d.%02d}",
 	    light,
 	    rawTemperature / 100,
 	    abs(rawTemperature) % 100,
 	    (int)pressure,
 	    ((int)(pressure * 100) % 100),
 	    (int)humidity,
-	    ((int)(humidity * 100) % 100));
+	    ((int)(humidity * 100) % 100),
+	    (int)temprature,
+	    ((int)(fabs(temprature) * 100) % 100));
 
 	if (len > 0) {
 		CLOUD_publishData((uint8_t *)json, len);
