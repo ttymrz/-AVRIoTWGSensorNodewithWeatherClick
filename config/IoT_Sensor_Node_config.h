@@ -9,7 +9,7 @@
 // <o> Send Interval <0-100000>
 // <i> Send interval in seconds
 // <id> application_send_interval
-#define CFG_SEND_INTERVAL 1
+#define CFG_SEND_INTERVAL 900
 
 // <o> Timeout <0-100000>
 // <i> Timeout
