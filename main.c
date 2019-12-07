@@ -28,6 +28,7 @@ SOFTWARE.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#import <time.h>
 #include "application_manager.h"
 #include "led.h"
 #include "sensors_handling.h"
@@ -59,7 +60,7 @@ void sendToCloud(void)
 	int   light          = SENSORS_getLightValue();
 	float pressure = 0, humidity = 0;
 	float temprature = 0;
-
+	time_t now = time(NULL) + UNIX_OFFSET;
 	// Read the sensor data registers
 	Weather_readSensors();
 
@@ -70,7 +71,8 @@ void sendToCloud(void)
 
 	int len = sprintf(
 	    json,
-	    "{\"Light\":%d,\"Temp\":\"%d.%02d\",\"Weather Click: Pressure\":%d.%02d,\"Weather Click: Humidity\":%d.%02d,\"Weather Click: Temprature\":%d.%02d}",
+	    "{\"timestamp\":%lu,\"Light\":%d,\"Temp\":\"%d.%02d\",\"WCPressure\":%d.%02d,\"WCHumidity\":%d.%02d,\"WCTemprature\":%d.%02d}",
+	    now,
 	    light,
 	    rawTemperature / 100,
 	    abs(rawTemperature) % 100,
