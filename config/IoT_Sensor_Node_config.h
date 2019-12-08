@@ -23,7 +23,7 @@
 // <s> project id
 // <i> Google Cloud Platform project id
 // <id> project_id
-#define CFG_PROJECT_ID "avr-iot"
+#define CFG_PROJECT_ID "avr-iot-261207"
 
 // <s> project region
 // <i> Google Cloud Platform project region
