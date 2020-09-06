@@ -125,6 +125,7 @@ void wifiConnectionStateChanged(uint8_t status)
 	// If we have no AP access we want to retry
 	if (status != 1) {
 		// Restart the WIFI module if we get disconnected from the WiFi Access Point (AP)
+		CLOUD_disconnect();
 		CLOUD_reset();
 	}
 }

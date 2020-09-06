@@ -105,6 +105,7 @@ packetReceptionHandler_t cloud_packetReceiveCallBackTable[CLOUD_PACKET_RECV_TABL
 void CLOUD_reset(void)
 {
 	debug_printError("CLOUD: Cloud Reset");
+	isResetting = false;
 	cloudInitialized = false;
 }
 
